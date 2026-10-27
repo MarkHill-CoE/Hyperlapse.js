@@ -1,0 +1,9 @@
+{
+  "name": "Hyperlapse.js",
+  "description": "JavaScript hyper-lapse utility for Google Street View",
+  "version": "1.0.0",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

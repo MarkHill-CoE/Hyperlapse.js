@@ -80,13 +80,25 @@ GSVPANO.PanoLoader = function (parameters) {
 	
 		for( y = 0; y < h; y++) {
 			for( x = 0; x < w; x++) {
-				url = 'http://maps.google.com/cbk?output=tile&panoid=' + panoId + '&zoom=' + _zoom + '&x=' + x + '&y=' + y + '&' + Date.now();
+				url = 'https://maps.google.com/cbk?output=tile&panoid=' + panoId + '&zoom=' + _zoom + '&x=' + x + '&y=' + y + '&' + Date.now();
 				(function (x, y) { 
 					var img = new Image();
+					img.crossOrigin = 'anonymous';
 					img.addEventListener('load', function () {
 						self.composeFromTile(x, y, this);
 					});
-					img.crossOrigin = '';
+					img.addEventListener('error', function () {
+						console.warn('Failed to load tile:', url);
+						_count++;
+						var p = Math.round(_count * 100 / _total);
+						self.setProgress(p);
+						if (_count === _total) {
+							self.canvas = _canvas;
+							if (self.onPanoramaLoad) {
+								self.onPanoramaLoad();
+							}
+						}
+					});
 					img.src = url;
 				})(x, y);
 			}

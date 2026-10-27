@@ -1,0 +1,14 @@
+{
+  "name": "hyperlapse",
+  "version": "1.0.0",
+  "description": "JavaScript hyper-lapse utility for Google Street View",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'Build OK'"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
